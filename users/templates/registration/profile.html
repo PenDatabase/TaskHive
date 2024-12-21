@@ -1,0 +1,191 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Title and Favicon -->
+    <title>User Profile - WORK</title>
+    <link rel="shortcut icon" href="{% static 'tasks/img/favicon.png' %}" type="image/x-icon">
+
+   <!-- CSS Files -->
+   <link rel="stylesheet" href="{% static 'tasks/css/animate-3.7.0.css' %}">
+   <link rel="stylesheet" href="{% static 'tasks/css/font-awesome-4.7.0.min.css' %}">
+   <link rel="stylesheet" href="{% static 'tasks/fonts/flat-icon/flaticon.css' %}">
+   <link rel="stylesheet" href="{% static 'tasks/css/bootstrap-4.1.3.min.css' %}">
+   <link rel="stylesheet" href="{% static 'tasks/css/owl-carousel.min.css' %}">
+   <link rel="stylesheet" href="{% static 'tasks/css/nice-select.css' %}">
+   <link rel="stylesheet" href="{% static 'tasks/css/style.css' %}">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #ffffff;
+            color: #333333;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #FFAD06;
+            margin: 0 auto 15px;
+        }
+
+        .profile-info {
+            margin-bottom: 15px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            color: #FFAD06;
+        }
+
+        .preloader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 173, 6, 0.3);
+            border-top: 4px solid #FFAD06;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader Starts -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Header Area Starts -->
+    <header class="header-area main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo-area">
+                        <h1><a href="{% url 'home' %}">WORK</a></h1>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="custom-navbar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>  
+                    <div class="main-menu">
+                        <ul>
+                            <li class="active"><a href="{% url 'home' %}">home</a></li>
+                            <li><a href="{% url 'create_task' %}">Create New Task</a></li>
+                            <li><a href="{% url 'job_categories' %}">categories</a></li>
+                            <li><a href="{% url 'task_search' %}">Search</a></li>
+                            {% comment %} <li><a href="#">blog</a>
+                                <ul class="sub-menu">
+                                    <li><a href="blog-home.html">Blog Home</a></li>
+                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact-us.html">contact</a></li>
+                            <li><a href="#">pages</a>
+                                <ul class="sub-menu">
+                                    <li><a href="{% url 'task_search' %}">Job Search</a></li>
+                                    <li><a href="job-single.html">Job Single</a></li>
+                                    <li><a href="pricing-plan.html">Pricing Plan</a></li>
+                                    <li><a href="elements.html">Elements</a></li>
+                                </ul>
+                            </li> {% endcomment %}
+                            <li class="menu-btn">
+                                {% if request.user.is_authenticated %}
+                                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;" alt="{{ user.username }}'s profile picture"> {{ user.first_name }}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{% url 'users:profile' %}">View Profile</a></li>
+                                        <li>
+                                            <form method="POST" action="{% url 'users:logout' %}" class="dropdown-item">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-link p-0">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                {% else %}
+                                    <a href="{% url 'users:login' %}" class="login">Log in</a>
+                                    <a href="{% url 'users:register' %}" class="template-btn">Register</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Area End -->
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="profile-header">
+                        {% if user.profile.image %}
+                            <img src="{{ user.profile.image.url }}" alt="{{ user.username }}'s profile picture" class="profile-image mb-3">
+                        {% else %}
+                            <img src="{% static 'tasks/img/default-profile.png' %}" alt="Default profile picture" class="profile-image mb-3">
+                        {% endif %}
+                        <h3 class="mb-2">{{ user.first_name }} {{ user.last_name }}</h3>
+                        <p class="text-muted">{{ user.username }}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="profile-info">
+                            <span class="profile-label">Email:</span> {{ user.email }}
+                        </div>
+                        <div class="profile-info">
+                            <span class="profile-label">Gender:</span> {{ user.gender }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="{% static 'tasks/js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'tasks/js/vendor/bootstrap-4.1.3.min.js' %}"></script>
+    <script src="{% static 'tasks/js/vendor/wow.min.js' %}"></script>
+    <script src="{% static 'tasks/js/vendor/owl-carousel.min.js' %}"></script>
+    <script src="{% static 'tasks/js/vendor/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'tasks/js/vendor/ion.rangeSlider.js' %}"></script>
+    <script src="{% static 'tasks/js/main.js' %}"></script>
+
+</body>
+</html>
