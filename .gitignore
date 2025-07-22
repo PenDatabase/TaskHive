@@ -16,3 +16,8 @@ myenv/
 
 # Django-related
 /media/
+
+
+# Database
+db.sqlite3
+*.sqlite3
