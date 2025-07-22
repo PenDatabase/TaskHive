@@ -14,13 +14,7 @@ def register(request):
 
         if form.is_valid():
             with transaction.atomic():
-                newuser = form.save()
-
-                # Create a new profile for the user
-                newprofile = Profile()
-                newprofile.user = newuser
-                newprofile.save()
-
+                form.save()
                 return redirect("home")
         else:
             form = RegisterForm()

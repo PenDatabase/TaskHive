@@ -9,7 +9,10 @@ class RegisterForm(UserCreationForm):
         fields = ("first_name", "last_name", "email", "username", "password1", "password2", "gender")
 
     
-    def save(self, commit = True):
-        userprofile = Profile()
-        userprofile.user = self.model
-        return super().save(commit)
+    def save(self, commit=True):
+        user = super().save(commit)
+        if commit:
+            userprofile = Profile()
+            userprofile.user = user
+            userprofile.save()
+        return user

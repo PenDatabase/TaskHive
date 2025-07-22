@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-r)6afdepyb+2%3yb&0a=mfhx59
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.railway.app']
 
 
 INTERNAL_IPS = [
