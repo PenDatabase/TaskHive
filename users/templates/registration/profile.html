@@ -160,7 +160,7 @@
                         {% if user.profile.image %}
                             <img src="{{ user.profile.image.url }}" alt="{{ user.username }}'s profile picture" class="profile-image mb-3">
                         {% else %}
-                            <img src="{% static 'tasks/img/default-profile.png' %}" alt="Default profile picture" class="profile-image mb-3">
+                            <img src="{% static 'img/default-profile.png' %}" alt="Default profile picture" class="profile-image mb-3">
                         {% endif %}
                         <h3 class="mb-2">{{ user.first_name }} {{ user.last_name }}</h3>
                         <p class="text-muted">{{ user.username }}</p>
