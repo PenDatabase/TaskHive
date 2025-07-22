@@ -76,7 +76,7 @@ def create_tasks(n, users, categories, locations):
 
 def main():
     users = create_users(10)
-    categories = create_categories(25)
+    categories = create_categories(5)
     locations = create_locations(15)
     create_tasks(1000, users, categories, locations)
 

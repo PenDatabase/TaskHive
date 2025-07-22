@@ -6,6 +6,9 @@ __pycache__/
 # Virtual environment
 myenv/
 
+# Environment variables
+.env
+
 
 # Logs
 *.log
@@ -21,3 +24,6 @@ myenv/
 # Database
 db.sqlite3
 *.sqlite3
+
+# Static files
+staticfiles/

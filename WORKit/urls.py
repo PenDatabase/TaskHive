@@ -30,7 +30,8 @@ urlpatterns = [
     path("users/", include("django.contrib.auth.urls")),
     path("users/", include("users.urls"))
 
-] + debug_toolbar_urls()
+]
 
 if settings.DEBUG:
+    urlpatterns += debug_toolbar_urls()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
